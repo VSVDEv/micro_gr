@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FindBugsFilter>
+    <Match>
+        <!-- Define specific bug codes to assign custom priorities -->
+        <Bug code="BC_BAD_PRACTICE">
+            <Priority>1</Priority>
+        </Bug>
+        <Bug code="NP_NULL_ON_SOME_PATH">
+            <Priority>2</Priority>
+        </Bug>
+    </Match>
+</FindBugsFilter>

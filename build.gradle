@@ -1,0 +1,64 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.7.15'
+    id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+    id 'checkstyle'
+    id 'pmd'
+}
+
+group = 'vsvdev.co.ua'
+version = '1'
+
+java {
+    sourceCompatibility = '11'
+}
+
+repositories {
+    mavenCentral()
+}
+
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    // https://mvnrepository.com/artifact/net.logstash.logback/logstash-logback-encoder
+    implementation group: 'net.logstash.logback', name: 'logstash-logback-encoder', version: '6.6'
+
+}
+
+
+checkstyle {
+    toolVersion '10.3.3'
+	configFile = file ("${project.rootDir}/config/checkstyle/checkstyle.xml")
+}
+
+pmd {
+    consoleOutput = true
+    toolVersion = "6.21.0"
+    rulesMinimumPriority = 5
+    ruleSetConfig =  project.resources.text.fromString(file("${rootDir}/config/pmd/rules.xml").text)
+   // ruleSets = ["category/java/errorprone.xml", "category/java/bestpractices.xml"]
+}
+
+tasks.named('test') {
+    useJUnitPlatform {
+        filter {
+            includeTestsMatching "*Test"
+            excludeTestsMatching "*IT"
+        }
+    }
+}
+
+def integrationTest = tasks.register("integrationTest", Test) {
+    useJUnitPlatform {
+        filter {
+            includeTestsMatching '*IT'
+            includeTestsMatching 'IT*'
+            includeTestsMatching '*ITCase'
+        }
+    }
+}
+
+tasks.named('check') {
+    dependsOn integrationTest
+}
