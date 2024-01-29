@@ -7,15 +7,21 @@ plugins {
 }
 
 group = 'vsvdev.co.ua'
-version = '1'
+version = '2'
 
 java {
     sourceCompatibility = '11'
 }
 
-repositories {
-    mavenCentral()
+
+    repositories {
+    maven {
+	    repository(url: "http://100.0.0.16:8081/repository/sv-proxy/") {
+             authentication(userName: nexusUsername, password: nexusPassword)
 }
+    }
+}
+
 
 
 dependencies {
@@ -61,4 +67,17 @@ def integrationTest = tasks.register("integrationTest", Test) {
 
 tasks.named('check') {
     dependsOn integrationTest
+}
+
+uploadArchives {
+    repositories {
+       mavenDeployer {
+             repository(url: "http://100.0.0.16:8081/repository/sv-proxy/") {
+             authentication(userName: nexusUsername, password: nexusPassword)
+}
+             pom.version = "2"
+             pom.artifactId = "micro"
+             pom.groupId = "vsvdev.co.ua"
+       }
+    }
 }
