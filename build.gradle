@@ -4,7 +4,7 @@ plugins {
     id 'io.spring.dependency-management' version '1.0.15.RELEASE'
     id 'checkstyle'
     id 'pmd'
-    id 'maven'
+    id 'maven-publish'
 }
 
 group = 'vsvdev.co.ua'
@@ -70,15 +70,38 @@ tasks.named('check') {
     dependsOn integrationTest
 }
 
-uploadArchives {
+
+
+publishing {
+    publications {
+        release(MavenPublication) {
+            groupId = "vsvdev.co.ua"
+            artifactId = "micro"
+            version = "$version"
+
+            afterEvaluate {
+                from components.release
+            }
+
+            pom {
+                developers {
+                    developer {
+                        id = 'vsvdev'
+                        name = 'vsvdev'
+                        email = 'vsvdev@'
+                    }
+                }
+            }
+        }
+    }
     repositories {
-       mavenDeployer {
-             repository(url: "http://100.0.0.16:8081/repository/sv/") {
-             authentication(userName: nexusUn, password: nexusP)
-}
-             pom.version = "2"
-             pom.artifactId = "micro"
-             pom.groupId = "vsvdev.co.ua"
-       }
+        maven {
+            name = "sv"
+            url = uri("http://100.0.0.16:8081/repository/sv/")
+            credentials {
+                username = nexusUn
+                password = nexusP
+            }
+        }
     }
 }
