@@ -18,7 +18,7 @@ java {
     repositories {
     maven {
 	    repository(url: "http://100.0.0.16:8081/repository/sv-group/") {
-             authentication(userName: nexusUn, password: nexusP)
+             authentication(userName: "jenk", password: "123")
 }
     }
 }
@@ -99,8 +99,8 @@ publishing {
             name = "sv"
             url = uri("http://100.0.0.16:8081/repository/sv/")
             credentials {
-                username = nexusUn
-                password = nexusP
+                username = "jenk"
+                password = "123"
             }
         }
     }
