@@ -4,7 +4,7 @@ plugins {
     id 'io.spring.dependency-management' version '1.0.15.RELEASE'
     id 'checkstyle'
     id 'pmd'
-apply plugin: 'maven'
+    id 'maven'
 }
 
 group = 'vsvdev.co.ua'
@@ -17,8 +17,8 @@ java {
 
     repositories {
     maven {
-	    repository(url: "http://100.0.0.16:8081/repository/sv-proxy/") {
-             authentication(userName: nexusUsername, password: nexusPassword)
+	    repository(url: "http://100.0.0.16:8081/repository/sv-group/") {
+             authentication(userName: nexusUn, password: nexusP)
 }
     }
 }
@@ -73,8 +73,8 @@ tasks.named('check') {
 uploadArchives {
     repositories {
        mavenDeployer {
-             repository(url: "http://100.0.0.16:8081/repository/sv-proxy/") {
-             authentication(userName: nexusUsername, password: nexusPassword)
+             repository(url: "http://100.0.0.16:8081/repository/sv/") {
+             authentication(userName: nexusUn, password: nexusP)
 }
              pom.version = "2"
              pom.artifactId = "micro"
