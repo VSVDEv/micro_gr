@@ -17,6 +17,7 @@ java {
 repositories {
     maven {
         url 'http://100.0.0.16:8081/repository/sv-group/'
+	allowInsecureProtocol = true
         credentials {
             username = nexusUn
             password = nexusP
@@ -118,6 +119,7 @@ repositories {
         maven {
              name = "sv"
             url = uri("http://100.0.0.16:8081/repository/sv/")
+	    allowInsecureProtocol = true
             credentials {
                 username = nexusUn
                 password = nexusP
