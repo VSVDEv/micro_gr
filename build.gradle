@@ -79,7 +79,7 @@ publishing {
     publications {
         mavenJava(MavenPublication) {
             groupId project.group
-            artifactId project.artifact
+            artifactId ${artifact}
             version project.version
             from components.java
             versionMapping {
