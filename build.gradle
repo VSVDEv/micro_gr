@@ -9,7 +9,7 @@ plugins {
 
 group = 'vsvdev.co.ua'
 version = '3'
-artifact = 'micro'
+def artifact = 'micro'
 
 java {
     sourceCompatibility = '11'
@@ -79,7 +79,7 @@ publishing {
     publications {
         mavenJava(MavenPublication) {
             groupId project.group
-            artifactId ${artifact}
+            artifactId artifact
             version project.version
             from components.java
             versionMapping {
