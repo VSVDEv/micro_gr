@@ -9,7 +9,8 @@ plugins {
 
 group = 'vsvdev.co.ua'
 version = '3'
-def artifact = 'micro'
+def artifact = 'micro_gr'
+archivesBaseName = artifact
 
 java {
     sourceCompatibility = '11'
