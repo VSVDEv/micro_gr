@@ -14,14 +14,17 @@ java {
     sourceCompatibility = '11'
 }
 
-
-    repositories {
+repositories {
     maven {
-	    repository(url: "http://100.0.0.16:8081/repository/sv-group/") {
-             authentication(userName: "jenk", password: "123")
-}
+        url 'http://100.0.0.16:8081/repository/sv-group/'
+        credentials {
+            username = nexusUn
+            password = nexusP
+        }
     }
+    // Other repositories can be added as needed
 }
+
 
 
 
@@ -99,8 +102,8 @@ publishing {
             name = "sv"
             url = uri("http://100.0.0.16:8081/repository/sv/")
             credentials {
-                username = "jenk"
-                password = "123"
+                username = nexusUn
+                password = nexusP
             }
         }
     }
