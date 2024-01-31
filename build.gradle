@@ -8,7 +8,8 @@ plugins {
 }
 
 group = 'vsvdev.co.ua'
-version = '2'
+version = '3'
+artifact = 'micro'
 
 java {
     sourceCompatibility = '11'
@@ -77,9 +78,9 @@ tasks.named('check') {
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            groupId 'vsvdev.co.ua'
-            artifactId 'micro'
-            version '2'
+            groupId project.group
+            artifactId project.artifact
+            version project.version
             from components.java
             versionMapping {
                 usage('java-api') {
