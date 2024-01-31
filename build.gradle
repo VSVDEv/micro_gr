@@ -73,33 +73,50 @@ tasks.named('check') {
     dependsOn integrationTest
 }
 
-
-
 publishing {
     publications {
-        release(MavenPublication) {
-            groupId = "vsvdev.co.ua"
-            artifactId = "micro"
-            version = "$version"
-
-            afterEvaluate {
-                from components.release
+        mavenJava(MavenPublication) {
+            groupId 'vsvdev.co.ua'
+            artifactId 'micro'
+            version '2'
+            from components.java
+            versionMapping {
+                usage('java-api') {
+                    fromResolutionOf('runtimeClasspath')
+                }
+                usage('java-runtime') {
+                    fromResolutionResult()
+                }
             }
-
             pom {
+                name = 'micro-gradle'
+                description = 'microservice'
+                url = 'https://github.com/VSVDEv/micro_gr.git'
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
                 developers {
                     developer {
-                        id = 'vsvdev'
-                        name = 'vsvdev'
-                        email = 'vsvdev@'
+                        id = 'VSVDev'
+                        name = 'VSVDev'
+                        email = 'vsvdev@ukr.net'
                     }
+                }
+                scm {
+                    connection = 'scm:git:https://github.com/VSVDEv/micro_gr.git'
+                    developerConnection = 'scm:git:https://github.com/VSVDEv/micro_gr.git'
+                    url = 'https://github.com/VSVDEv/micro_gr.git'
                 }
             }
         }
     }
-    repositories {
+
+repositories {
         maven {
-            name = "sv"
+             name = "sv"
             url = uri("http://100.0.0.16:8081/repository/sv/")
             credentials {
                 username = nexusUn
@@ -108,3 +125,4 @@ publishing {
         }
     }
 }
+    
